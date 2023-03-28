@@ -2,7 +2,6 @@ package com.tradingp.frontend.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +33,8 @@ public class HomeController {
   }
 
   @PostMapping("/order")
-  public String order(@ModelAttribute Order order, Model model) {
+  public String order(@ModelAttribute Order order) {
+    System.out.println(order);
     RestTemplate restTemplate = new RestTemplate();
     
     // request to backend
@@ -42,8 +42,6 @@ public class HomeController {
 
     // response back from the backend
     ResponseEntity<Order> response = restTemplate.postForEntity(url, order, Order.class);
-
-    model.addAttribute("order", response.getBody());
 
     return "redirect:/";
   }

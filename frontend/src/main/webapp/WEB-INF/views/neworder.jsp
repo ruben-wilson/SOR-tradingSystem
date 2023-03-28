@@ -28,10 +28,11 @@
     margin-bottom: 20%;
     ">
     <h1 style="text-align: center;">Place a new order</h1>
+    <form action="/order" method="POST">
     <div class="mb-3">
       <label for="order-type-select">Order Type:</label>
       <div class="selectcustomform">
-        <select class="form-select" id="order-type-select" aria-label="Default select example">
+        <select name="orderType" class="form-select" id="order-type-select" aria-label="Default select example">
           <option disabled selected value="">Select an option</option>
           <option value="buy">Buy</option>
           <option value="sell">Sell</option>
@@ -42,7 +43,7 @@
       <label for="exampleFormControlInput1" class="form-label">Price</label>
       <div class="input-group">
         <span class="input-group-text">$/£</span>
-        <input type="text" class="form-control" aria-label="Amount">
+        <input type="text" name="price" class="form-control" aria-label="Amount">
         <span class="input-group-text">.00</span>
       </div>
     </div>
@@ -50,11 +51,12 @@
       <label for="exampleFormControlInput1" class="form-label">Quantity</label>
       <div class="input-group">
         <span class="input-group-text">Amount</span>
-        <input type="text" class="form-control" aria-label="Amount">
+        <input type="text" name="amount" class="form-control" aria-label="Amount">
       </div>
     </div>
 
     <button type="submit" class="btn btn-primary" style="width: 20%; margin: auto;">Submit</button>
+      </form>
   </div>
 
 </body>
