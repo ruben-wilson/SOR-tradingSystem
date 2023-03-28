@@ -18,12 +18,27 @@ public class HomeController {
     return "home";
   }
 
+  @GetMapping("/login")
+  public String login() {
+    return "login";
+  }
+
+  @GetMapping("/register")
+  public String register() {
+    return "register";
+  }
+
+  @GetMapping("/neworder")
+  public String newOrder() {
+    return "neworder";
+  }
+
   @PostMapping("/order")
   public String order(@ModelAttribute Order order, Model model) {
     RestTemplate restTemplate = new RestTemplate();
     
     // request to backend
-    String url = "http://localhost:8080/order"; 
+    String url = "http://localhost:8080/order";
 
     // response back from the backend
     ResponseEntity<Order> response = restTemplate.postForEntity(url, order, Order.class);
@@ -31,10 +46,6 @@ public class HomeController {
     model.addAttribute("order", response.getBody());
 
     return "redirect:/";
-
-    
   }
-  
-
 }
 

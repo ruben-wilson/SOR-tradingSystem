@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Sign Up</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
   </head>
   <body>
@@ -17,9 +17,7 @@
 </html>
 <body class="body">
 
-<div class="container-fluid" style="background-color: teal; height: 80vh; width: 100vw;">
-  <h1 class="text-center" style="font-size: 50px; color: white; padding-top: 20vh;">HomePage</h1>
+<div class="container-fluid" style="height: 80vh; width: 100vw;">
+<h1 class="text-center" style="font-size: 50px; color: white; padding-top: 20vh;">Sign Up</h1>
 </div>
-
 </body>
-<jsp:include page="about.jsp" />

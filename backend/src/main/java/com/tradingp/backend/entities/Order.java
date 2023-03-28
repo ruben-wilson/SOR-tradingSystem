@@ -1,44 +1,44 @@
 package com.tradingp.backend.entities;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
-@Table(name = "orders")
 public class Order {
-  
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
-  private int id;
+  private int orderId;
 
-  @Column(name = "order_type")
   private String orderType;
 
-  @Column(name = "price")
   private double price;
 
-  @Column(name = "quantity")
-  private int quantity;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "logBook_id")
+  private LogBook logBook;
+  
+  private double quantity;
 
-  @Column(name = "status")
   private String status;
 
-  @Column(name = "date")
   private String date;
 
-  // Getters and Setters
-
-  public int getId() {
-    return id;
+  public Order() {
+    super();
   }
 
-  public void setId(int id) {
-    this.id = id;
+  public int getOrderId() {
+    return orderId;
+  }
+
+  public void setOrderId(int orderId) {
+    this.orderId = orderId;
   }
 
   public String getOrderType() {
@@ -57,11 +57,11 @@ public class Order {
     this.price = price;
   }
 
-  public int getQuantity() {
+  public double getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(int quantity) {
+  public void setQuantity(double quantity) {
     this.quantity = quantity;
   }
 
@@ -80,28 +80,5 @@ public class Order {
   public void setDate(String date) {
     this.date = date;
   }
-
-  // toString()
-
-  @Override
-  public String toString() {
-    return "Order [date=" + date + ", id=" + id + ", orderType=" + orderType + ", price=" + price + ", quantity="
-        + quantity + ", status=" + status + "]";
-  }
-
-  // Constructors
-
-  public Order() {
-  }
-
-  public Order(int id, String orderType, double price, int quantity, String status, String date) {
-    this.id = id;
-    this.orderType = orderType;
-    this.price = price;
-    this.quantity = quantity;
-    this.status = status;
-    this.date = date;
-  }
-
 
 }
