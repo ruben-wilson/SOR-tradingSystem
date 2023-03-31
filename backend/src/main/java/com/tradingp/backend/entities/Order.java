@@ -17,11 +17,13 @@ public class Order {
 
   private String orderType;
 
+  private boolean isBid;
+
   private double price;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "logBook_id")
-  private LogBook logBook;
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "OrderBook_id")
+  private OrderBook orderBook;
   
   private double quantity;
 
@@ -31,6 +33,18 @@ public class Order {
 
   public Order() {
     super();
+  }
+
+
+  public Order(int orderId, String orderType, boolean isBid, double price, double quantity, String status,
+      String date) {
+    this.orderId = orderId;
+    this.orderType = orderType;
+    this.isBid = isBid;
+    this.price = price;
+    this.quantity = quantity;
+    this.status = status;
+    this.date = date;
   }
 
   public int getOrderId() {
@@ -76,9 +90,35 @@ public class Order {
   public String getDate() {
     return date;
   }
+  
 
   public void setDate(String date) {
     this.date = date;
   }
+
+  public boolean isBid() {
+    return this.isBid;
+  }
+
+  public void setBid(boolean isBid) {
+    this.isBid = isBid;
+  }
+
+  public OrderBook getOrderBook() {
+    return orderBook;
+  }
+
+  public void setOrderBook(OrderBook orderBook) {
+    this.orderBook = orderBook;
+  }
+
+
+  @Override
+  public String toString() {
+    return "Order [orderId=" + orderId + ", orderType=" + orderType + ", isBid=" + isBid + ", price=" + price
+        + ", orderBook=" + orderBook + ", quantity=" + quantity + ", status=" + status + ", date=" + date + "]";
+  } 
+  
+  
 
 }
