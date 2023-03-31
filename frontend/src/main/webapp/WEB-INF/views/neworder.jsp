@@ -24,7 +24,7 @@
     margin: auto; 
     display: flex; 
     flex-direction: column;
-    margin-top: 20%;
+    margin-top: 10%;
     margin-bottom: 20%;
     ">
     <h1 style="text-align: center;">Place a new order</h1>
@@ -42,7 +42,7 @@
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Price</label>
       <div class="input-group">
-        <span class="input-group-text">$/£</span>
+        <span class="input-group-text">£</span>
         <input type="text" name="price" class="form-control" aria-label="Amount">
         <span class="input-group-text">.00</span>
       </div>

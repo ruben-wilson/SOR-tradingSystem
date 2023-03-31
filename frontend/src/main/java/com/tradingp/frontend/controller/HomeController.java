@@ -1,16 +1,21 @@
 package com.tradingp.frontend.controller;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
-import com.tradingp.frontend.models.Order;
+import com.tradingp.frontend.models.User;
 
 @Controller
 public class HomeController {
+
+  @ModelAttribute("user")
+  public User user() {
+    return new User();
+  }
   
   @GetMapping("/")
   public String home() {
@@ -22,28 +27,24 @@ public class HomeController {
     return "login";
   }
 
-  @GetMapping("/register")
-  public String register() {
-    return "register";
-  }
-
-  @GetMapping("/neworder")
-  public String newOrder() {
-    return "neworder";
-  }
-
-  @PostMapping("/order")
-  public String order(@ModelAttribute Order order) {
-    System.out.println(order);
+  // login method
+  @PostMapping("/login")
+  public String login(@ModelAttribute User user, Model model) {
+    System.out.println(user);
     RestTemplate restTemplate = new RestTemplate();
     
     // request to backend
-    String url = "http://localhost:8080/order";
+    String url = "http://localhost:8080/login";
 
     // response back from the backend
-    ResponseEntity<Order> response = restTemplate.postForEntity(url, order, Order.class);
+    User response = restTemplate.postForObject(url, user, User.class);
 
-    return "redirect:/";
+    if(response != null) {
+      model.addAttribute("user", response);
+      return "redirect:/login";
+    } else {
+      return "redirect:/";
+    }
   }
 }
 

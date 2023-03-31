@@ -16,7 +16,7 @@
 </html>
 <body class="body">
 
-<div class="container-fluid" style="background-color: grey; height: 80vh; width: 100vw;">
-<h1 class="text-center" style="font-size: 50px; color: white; padding-top: 20vh;">About</h1>
+<div class="container-fluid" style="height: 80vh; width: 100vw;">
+<h1 class="text-center" style="font-size: 50px; padding-top: 20vh;">About</h1>
 </div>
 </body>
