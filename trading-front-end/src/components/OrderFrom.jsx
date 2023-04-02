@@ -1,8 +1,6 @@
-import { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import { useState } from "react";
 
 import makeOrder from "../apis/MakeOrder";
-import {FormContext} from "../contextProviders/FormContext";
 
 const OrderFrom = (props) => {
 
@@ -12,6 +10,7 @@ const OrderFrom = (props) => {
 
 
   const handleClick = async (orderPrice, orderQuantity, setIsBid) =>{
+    console.log(props.isBid)
     const response = await makeOrder(
       "http://localhost:8080/addOrder",
       orderPrice,

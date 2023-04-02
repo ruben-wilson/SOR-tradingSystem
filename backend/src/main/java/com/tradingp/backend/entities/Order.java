@@ -110,6 +110,14 @@ public class Order {
     this.isBid = isBid;
   }
 
+  public boolean getIsBid() {
+    return this.isBid;
+  }
+
+  public void setIsBid(boolean isBid) {
+    this.isBid = isBid;
+  }
+
   public OrderBook getOrderBook() {
     return orderBook;
   }
