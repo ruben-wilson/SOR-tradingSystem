@@ -102,8 +102,13 @@ public class OrderBook {
     return allAsks.isEmpty() ? null : allAsks;
   }
 
+  @Override
+  public String toString() {
+    return "OrderBook [orderBookId=" + orderBookId + ", orderList=" + null + "]";
+  }
 
 
+  
   
 
 

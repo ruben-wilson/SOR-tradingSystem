@@ -1,5 +1,7 @@
 package com.tradingp.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -22,14 +24,18 @@ public class Order {
   private double price;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "OrderBook_id")
+  @JoinColumn(name = "order_book_id")
+  @JsonIgnore
   private OrderBook orderBook;
+
+  private double initialQuantity;
   
   private double quantity;
 
   private String status;
 
   private String date;
+
 
   public Order() {
     super();
@@ -112,12 +118,21 @@ public class Order {
     this.orderBook = orderBook;
   }
 
+  public double getInitialQuantity() {
+    return initialQuantity;
+  }
 
+  public void setInitialQuantity(double initialQuantity) {
+    this.initialQuantity = initialQuantity;
+  }
+
+  
   @Override
   public String toString() {
     return "Order [orderId=" + orderId + ", orderType=" + orderType + ", isBid=" + isBid + ", price=" + price
         + ", orderBook=" + orderBook + ", quantity=" + quantity + ", status=" + status + ", date=" + date + "]";
-  } 
+  }
+
   
   
 

@@ -12,7 +12,7 @@ import com.tradingp.backend.entities.Order;
 import com.tradingp.backend.entities.OrderBook;
 
 @Service
-public class OrderBookService extends OrderBookRepoService {
+public class OrderBookService {
 
   private OrderBook orderBook;
 
