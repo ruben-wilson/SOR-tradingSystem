@@ -8,24 +8,30 @@ const fetchOrderBook = (url) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-     axios
-       .get(url, {
-         params: {
-           id: 1,
-         },
-       })
-       .catch((error) => {
-         console.log(error);
-         setError(error);
-       })
-       .then((response) => {
-         console.log(response);
-         setData(response.data);
-       })
-       .finally(() => {
-        setLoading(false);
-       });
-  }, [url]);
+    const timer = setInterval(() => { 
+      axios
+        .get(url, {
+          params: {
+            id: 1,
+          },
+        })
+        .catch((error) => {
+          setError(error);
+        })
+        .then((response) => {
+          setData(response.data);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }, 2000);
+
+    return () => {
+      clearInterval(timer);
+      
+    };
+
+  }, []);
 
   return {data: data, loading: loading, error: error};
 };

@@ -53,6 +53,14 @@ public class Order {
     this.date = date;
   }
 
+  public void setAmount(String amount){
+    this.quantity = Double.parseDouble(amount);
+  }
+
+  public void setTimestamp(String timeStamp){
+    this.date = timeStamp;
+  }
+
   public int getOrderId() {
     return orderId;
   }

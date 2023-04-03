@@ -48,6 +48,7 @@ public class OrderController {
 
       orderBook.setOrderList(updatedOrderBook.getOrderList());
 
+      System.out.println("\n order controller line 21: 33" + updatedOrderBook.getOrderList());
       orderBookRepoService.addItem(orderBook);
       return true;
   }
