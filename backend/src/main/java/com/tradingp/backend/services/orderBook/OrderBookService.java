@@ -24,6 +24,7 @@ public class OrderBookService {
   }
 
 	public Map<String, Object> matchOrder(Order order, OrderBook orderBook){
+
     Map<String, Object> output = new HashMap<>();
     // checks if there is no match possible or a trade error
     if(order == null || order.getPrice() == 0 || order.getQuantity() == 0){
@@ -161,6 +162,11 @@ public class OrderBookService {
           executedTrades.add(incomingOrder);
           break;             
         }
+      }
+
+      if(quantityToFill > 0){
+        incomingOrder.setQuantity(quantityToFill);
+        this.orderBook.addOrder(incomingOrder);
       }
 
       return executedTrades;
