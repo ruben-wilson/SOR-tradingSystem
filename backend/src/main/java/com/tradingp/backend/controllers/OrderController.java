@@ -1,62 +1,57 @@
 package com.tradingp.backend.controllers;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tradingp.backend.entities.Order;
-import com.tradingp.backend.services.OrderService;
+import com.tradingp.backend.entities.OrderBook;
+import com.tradingp.backend.services.OrderRepoService;
+import com.tradingp.backend.services.orderBook.OrderBookRepoService;
+import com.tradingp.backend.services.orderBook.OrderBookService;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 public class OrderController {
+  
+  @Autowired
+  OrderRepoService orderRepoService;
 
   @Autowired
-  OrderService orderService;
+  OrderBookRepoService orderBookRepoService;
 
-  @GetMapping("/order")
-  public String newOrders() {
-    return "order";
+  @Autowired
+  OrderBookService orderBookService;
+
+  @CrossOrigin(origins = "http://localhost:5173")
+  @PostMapping("/addOrder")
+  public boolean addOrder(@RequestBody Order incomingOrder) {
+
+      Order order = orderRepoService.createOrder(incomingOrder);
+      OrderBook orderBook = orderBookRepoService.findItemById(1);
+      order.setOrderBook(orderBook);
+
+      Map<String, Object> orderBookResponse = orderBookService.matchOrder(order, orderBook);
+
+      OrderBook updatedOrderBook = (OrderBook) orderBookResponse.get("orderBook");
+
+      List<Order> executedTrades = (List<Order>) orderBookResponse.get("trades");
+
+      System.out.println("\n order controller line 21: " + updatedOrderBook.getOrderList());
+      System.out.println("\n order controller line 21: " + executedTrades);
+
+      orderBook.setOrderList(updatedOrderBook.getOrderList());
+
+      orderBookRepoService.addItem(orderBook);
+      return true;
   }
 
-  @GetMapping("/neworderfailure")
-  public String newOrderFailure() {
-    return "neworderfailure";
-  }
 
-  @PostMapping("/order")
-  public ResponseEntity<Map<String, String>> newOrder(@RequestBody Order order) {
-
-    LocalDateTime dateTime = LocalDateTime.now();
-		String formattedDate = dateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-
-    Order o = new Order();
-
-    o.setDate(formattedDate);
-
-    Order savedInfo = orderService.addOrder(o);
-
-    Map<String, String> response = new HashMap<>();
-
-
-    if (savedInfo != null) {
-      response.put("status", "success");
-      response.put("message", "Order created successfully with ID: " + savedInfo.getOrderId());
-      return ResponseEntity.ok(response);
-  } else {
-      response.put("status", "error");
-      response.put("message", "Failed to create order");
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-  }
-
-}
 
 }

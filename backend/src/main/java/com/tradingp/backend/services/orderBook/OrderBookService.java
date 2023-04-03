@@ -12,7 +12,7 @@ import com.tradingp.backend.entities.Order;
 import com.tradingp.backend.entities.OrderBook;
 
 @Service
-public class OrderBookService extends OrderBookRepoService {
+public class OrderBookService {
 
   private OrderBook orderBook;
 
@@ -24,6 +24,7 @@ public class OrderBookService extends OrderBookRepoService {
   }
 
 	public Map<String, Object> matchOrder(Order order, OrderBook orderBook){
+
     Map<String, Object> output = new HashMap<>();
     // checks if there is no match possible or a trade error
     if(order == null || order.getPrice() == 0 || order.getQuantity() == 0){
@@ -161,6 +162,11 @@ public class OrderBookService extends OrderBookRepoService {
           executedTrades.add(incomingOrder);
           break;             
         }
+      }
+
+      if(quantityToFill > 0){
+        incomingOrder.setQuantity(quantityToFill);
+        this.orderBook.addOrder(incomingOrder);
       }
 
       return executedTrades;

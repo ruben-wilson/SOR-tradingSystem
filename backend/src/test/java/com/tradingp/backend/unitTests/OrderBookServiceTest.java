@@ -402,6 +402,36 @@ public class OrderBookServiceTest {
     assertEquals(5, trades.size());
   }
 
+  // @Test
+  // void OrderBook_1Match_askWithBid_excessQuantity() {
+  //   Order askOrder = new Order(5, "ask", false, 90, 200, "unfulfilled", "12/3/21");
+
+   
+  //   Order order1 = new Order(3, "bids", true, 100, 50, "unfulfilled", "12/3/21");
+
+
+  //   OrderBook orderBook = new OrderBook();
+  //   orderBook.addOrder(order1);
+
+
+  //   Map<String, Object> response = orderBookService.matchOrder(askOrder, orderBook);
+
+  //   List<Order> trades = (List<Order>) response.get("trades");
+  //   OrderBook outputOrderBook = (OrderBook) response.get("orderBook");
+
+  //   assertNotNull(outputOrderBook);
+  //   assertEquals(2, trades.get(0).getOrderId());
+  //   assertEquals(2, trades.size());
+    
+
+  //   assertEquals(true, outputOrderBook.getOrderList().isEmpty());
+  //   assertEquals(0, outputOrderBook.getOrderList().size());
+  //   assertEquals(null, outputOrderBook.getAsks());
+  //   assertEquals(3, outputOrderBook.getBids().get(0).getOrderId());
+
+   
+  // }
+
 
   
 

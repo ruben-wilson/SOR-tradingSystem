@@ -18,7 +18,7 @@ public class OrderBook {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int orderBookId;
 
-  @OneToMany(mappedBy = "orderBook", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "orderBook", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Order> orderList;
 
   public OrderBook() {
@@ -102,8 +102,13 @@ public class OrderBook {
     return allAsks.isEmpty() ? null : allAsks;
   }
 
+  @Override
+  public String toString() {
+    return "OrderBook [orderBookId=" + orderBookId + ", orderList=" + null + "]";
+  }
 
 
+  
   
 
 
