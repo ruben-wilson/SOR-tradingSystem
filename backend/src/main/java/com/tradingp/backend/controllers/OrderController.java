@@ -49,7 +49,7 @@ public class OrderController {
 
     if (savedInfo != null) {
       response.put("status", "success");
-      response.put("message", "Order created successfully with ID: " + savedInfo.getId());
+      response.put("message", "Order created successfully with ID: " + savedInfo.getOrderId());
       return ResponseEntity.ok(response);
   } else {
       response.put("status", "error");
