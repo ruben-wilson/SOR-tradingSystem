@@ -37,10 +37,10 @@ function BidOrderTable( props ) {
             <thead>
               <tr>
                 <th scope="col">Date</th>
-                <th scope="col">Initial Quantity</th>
-                <th scope="col">Quantity</th>
                 <th scope="col">Order Type</th>
                 <th scope="col">Status</th>
+                <th scope="col">Initial Quantity</th>
+                <th scope="col">Quantity</th>
                 <th scope="col">Price</th>
               </tr>
             </thead>
