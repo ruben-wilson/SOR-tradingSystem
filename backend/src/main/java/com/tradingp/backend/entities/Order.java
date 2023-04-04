@@ -21,6 +21,8 @@ public class Order {
 
   private boolean isBid;
 
+  private boolean isInternal;
+
   private double price;
 
   @ManyToOne(fetch = FetchType.EAGER)
@@ -35,6 +37,8 @@ public class Order {
   private String status;
 
   private String date;
+
+  
 
 
   public Order() {
@@ -142,6 +146,13 @@ public class Order {
     this.initialQuantity = initialQuantity;
   }
 
+  public boolean isInternal() {
+    return isInternal;
+  }
+
+  public void setInternal(boolean isInternal) {
+    this.isInternal = isInternal;
+  }
   
   @Override
   public String toString() {

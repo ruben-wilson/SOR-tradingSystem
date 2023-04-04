@@ -20,6 +20,8 @@ public class OrderBook {
 
   private String symbol;
 
+  private boolean isInternal;
+
   @OneToMany(mappedBy = "orderBook", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Order> orderList;
 
@@ -42,6 +44,14 @@ public class OrderBook {
 
   public void setSymbol(String symbol) {
     this.symbol = symbol;
+  }
+  
+  public boolean isInternal() {
+    return isInternal;
+  }
+
+  public void setInternal(boolean isInternal) {
+    this.isInternal = isInternal;
   }
 
   public List<Order> getOrderList() {
@@ -137,16 +147,25 @@ public class OrderBook {
       return null;
     }
 
-    List<Order> allAsks =  orderList.stream()
+    List<Order> allAsks =  this.orderList.stream()
                                     .filter(order -> !order.isBid())
                                     .collect(Collectors.toList());
     return allAsks.isEmpty() ? null : allAsks;
+  }
+
+  public List<Order> getInternalOrders(){
+    List<Order> allInternalOrders = this.orderList.stream()
+                                   .filter(order -> order.isInternal())
+                                   .collect(Collectors.toList());
+    return allInternalOrders.isEmpty() ? null : allInternalOrders;
   }
 
   @Override
   public String toString() {
     return "OrderBook [orderBookId=" + orderBookId + ", orderList=" + null + "]";
   }
+
+  
 
 
 }

@@ -27,8 +27,8 @@ public class OrderBookController {
 
   @CrossOrigin(origins = "http://localhost:5173")
   @GetMapping("/orderBook")
-  public OrderBook findOrderBookByID(@RequestParam int id){
-    OrderBook orderBook = orderBookRepoService.findItemById(id);
+  public OrderBook findOrderBookByID(@RequestParam String symbol){
+    OrderBook orderBook = orderBookRepoService.findOrderBookBySymbol(symbol);
     
     System.out.println("\n ordrBookcontroller " + orderBook.getOrderList());
     return orderBook;
@@ -50,8 +50,13 @@ public class OrderBookController {
       responseOrderBook.setSymbol(symbol);
       orderBook = orderBookRepoService.saveLiveOrderBook(responseOrderBook);
     }else{
+
+      List<Order> unmatchedInternalOrders = orderBook.getInternalOrders();
       orderBook.getOrderList().clear();
       orderBook.getOrderList().addAll(responseOrderBook.getOrderList());
+      if(unmatchedInternalOrders != null){
+        orderBook.getOrderList().addAll(unmatchedInternalOrders);
+      }
       // orderBook.setOrderList(responseOrderBook.getOrderList());
       orderBook = orderBookRepoService.saveLiveOrderBook(orderBook);
 

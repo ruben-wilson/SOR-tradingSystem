@@ -11,7 +11,7 @@ import {FormContext} from "../contextProviders/FormContext";
 
 function OrderBook() {
 
-  const { data, loading, error } = getOrderBook(
+  const { data, loading, error, reload } = getOrderBook(
     "http://localhost:8080/liveOrderBook?symbol=ETHUSD&"
   );
   
@@ -19,6 +19,7 @@ function OrderBook() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return console.log(Error);
+  if (reload) return window.location.reload();
 
   const handleButtonClick = () => {
     setShowForm(true);

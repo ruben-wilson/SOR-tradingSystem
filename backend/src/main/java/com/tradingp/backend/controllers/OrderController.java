@@ -35,6 +35,7 @@ public class OrderController {
 
       Order order = orderRepoService.createOrder(incomingOrder);
       OrderBook orderBook = orderBookRepoService.findItemById(1);
+      
       order.setOrderBook(orderBook);
 
       Map<String, Object> orderBookResponse = orderBookService.matchOrder(order, orderBook);

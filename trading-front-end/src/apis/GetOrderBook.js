@@ -5,6 +5,7 @@ const fetchOrderBook = (url) => {
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [reload, setReload] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -16,15 +17,19 @@ const fetchOrderBook = (url) => {
           },
         })
         .catch((error) => {
+          console.log(error);
           setError(error);
         })
         .then((response) => {
-          setData(response.data);
+          response.data == "undefined"
+            ? setReload(true)
+            : setData(response.data);
+          
         })
         .finally(() => {
           setLoading(false);
         });
-    }, 2000);
+    }, 500);
 
     return () => {
       clearInterval(timer);
@@ -33,7 +38,7 @@ const fetchOrderBook = (url) => {
 
   }, []);
 
-  return {data: data, loading: loading, error: error};
+  return {data: data, loading: loading, error: error, reload: reload};
 };
 
 export default fetchOrderBook;
