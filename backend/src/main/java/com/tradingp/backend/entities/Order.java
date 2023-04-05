@@ -21,6 +21,8 @@ public class Order {
 
   private boolean isBid;
 
+  private boolean isInternal;
+
   private double price;
 
   @ManyToOne(fetch = FetchType.EAGER)
@@ -35,6 +37,8 @@ public class Order {
   private String status;
 
   private String date;
+
+  
 
 
   public Order() {
@@ -51,6 +55,14 @@ public class Order {
     this.quantity = quantity;
     this.status = status;
     this.date = date;
+  }
+
+  public void setAmount(String amount){
+    this.quantity = Double.parseDouble(amount);
+  }
+
+  public void setTimestamp(String timeStamp){
+    this.date = timeStamp;
   }
 
   public int getOrderId() {
@@ -134,6 +146,13 @@ public class Order {
     this.initialQuantity = initialQuantity;
   }
 
+  public boolean isInternal() {
+    return isInternal;
+  }
+
+  public void setInternal(boolean isInternal) {
+    this.isInternal = isInternal;
+  }
   
   @Override
   public String toString() {

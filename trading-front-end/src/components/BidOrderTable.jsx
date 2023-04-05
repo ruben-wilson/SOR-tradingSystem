@@ -1,5 +1,4 @@
 import { useState } from "react";
-import {FormContext} from "../contextProviders/FormContext";
 import OrderFrom from "./OrderFrom";
 import Row from "./BidRow";
 
@@ -23,10 +22,12 @@ function BidOrderTable( props ) {
       ) : (
         <div className="d-flex flex-column">
           <div className="d-flex">
-            <h1>Bids</h1>
+            <h1 className="text-info" >Bids</h1>
             <button
               type="button"
-              onClick={()=>{setForm(true);}}
+              onClick={() => {
+                setForm(true);
+              }}
               className="btn btn-success pl-4 my-2 mx-4"
             >
               Make a bid
@@ -37,10 +38,10 @@ function BidOrderTable( props ) {
             <thead>
               <tr>
                 <th scope="col">Date</th>
-                <th scope="col">Initial Quantity</th>
-                <th scope="col">Quantity</th>
                 <th scope="col">Order Type</th>
                 <th scope="col">Status</th>
+                <th scope="col">Initial Quantity</th>
+                <th scope="col">Quantity</th>
                 <th scope="col">Price</th>
               </tr>
             </thead>

@@ -1,10 +1,15 @@
 #root {
+  margin: 0px;
+  padding: 0px;
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
 }
 
 .App{
+  background-color: black;
+  margin: 0px;
+  padding: 0px;
   margin: 0;
     min-width: 320px;
     min-height: 100vh;

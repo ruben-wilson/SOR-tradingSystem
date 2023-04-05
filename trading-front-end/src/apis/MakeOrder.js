@@ -12,7 +12,7 @@ const makeOrder = (url, setPrice, setQuantity, setIsBid) => {
         return null;
       })
       .then((response) => {
-        return response.data;
+        return response;
       });
   
 };

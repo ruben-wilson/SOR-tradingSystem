@@ -19,6 +19,7 @@ public class OrderRepoService implements repoService<Order> {
     newOrder.setInitialQuantity(newOrder.getQuantity());
     newOrder.setStatus("unfulfilled");
     newOrder.setDate(this.getFormattedTime());
+    newOrder.setInternal(true);
     if( newOrder.isBid() == true){
       newOrder.setOrderType("bid");
     }else{

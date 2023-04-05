@@ -18,6 +18,10 @@ public class OrderBook {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int orderBookId;
 
+  private String symbol;
+
+  private boolean isInternal;
+
   @OneToMany(mappedBy = "orderBook", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Order> orderList;
 
@@ -29,8 +33,25 @@ public class OrderBook {
     return orderBookId;
   }
 
+  
   public void setOrderBookId(int orderBookId) {
     this.orderBookId = orderBookId;
+  }
+
+  public String getSymbol() {
+    return symbol;
+  }
+
+  public void setSymbol(String symbol) {
+    this.symbol = symbol;
+  }
+  
+  public boolean isInternal() {
+    return isInternal;
+  }
+
+  public void setInternal(boolean isInternal) {
+    this.isInternal = isInternal;
   }
 
   public List<Order> getOrderList() {
@@ -56,6 +77,7 @@ public class OrderBook {
                           .orElse(null);
   }
 
+
   public boolean deleteOrder(Order orderToDelete) {
     if (this.orderList == null) {
       return false;
@@ -78,7 +100,36 @@ public class OrderBook {
 
     this.orderList.get(orderToUpdate).setQuantity(newQuantity);                   
   }
-  
+
+  public void setBids(List<Order> bids){
+    if(bids != null){
+      bids.stream()
+          .forEach(b -> {
+            b.setIsBid(true);
+            b.setOrderType("bid");
+            b.setInitialQuantity(b.getQuantity());
+          });
+    }
+    if (this.orderList == null) {
+      this.orderList = bids;
+    }
+    this.orderList.addAll(bids);
+  } 
+
+  public void setAsks(List<Order> asks) {
+    if(asks != null){
+      asks.stream()
+          .forEach(a -> {
+            a.setIsBid(false);
+            a.setOrderType("ask");
+            a.setInitialQuantity(a.getQuantity());
+          });
+    }
+    if (this.orderList == null) {
+      this.orderList = asks;
+    }
+    this.orderList.addAll(asks);
+  }
 
   public List<Order> getBids(){
     if(this.orderList == null){
@@ -96,10 +147,17 @@ public class OrderBook {
       return null;
     }
 
-    List<Order> allAsks =  orderList.stream()
+    List<Order> allAsks =  this.orderList.stream()
                                     .filter(order -> !order.isBid())
                                     .collect(Collectors.toList());
     return allAsks.isEmpty() ? null : allAsks;
+  }
+
+  public List<Order> getInternalOrders(){
+    List<Order> allInternalOrders = this.orderList.stream()
+                                   .filter(order -> order.isInternal())
+                                   .collect(Collectors.toList());
+    return allInternalOrders.isEmpty() ? null : allInternalOrders;
   }
 
   @Override
@@ -107,11 +165,7 @@ public class OrderBook {
     return "OrderBook [orderBookId=" + orderBookId + ", orderList=" + null + "]";
   }
 
-
-  
   
 
 
-
-  
 }

@@ -150,6 +150,7 @@ public class OrderBookService {
           openPosition.setQuantity(0);
 
           executedTrades.add(openPosition);
+          executedTrades.add(incomingOrder);
         }else if(quantityToFill < openPosition.getQuantity()){
 
           openPosition.setQuantity(openPosition.getQuantity() - quantityToFill);

@@ -35,6 +35,7 @@ public class OrderController {
 
       Order order = orderRepoService.createOrder(incomingOrder);
       OrderBook orderBook = orderBookRepoService.findItemById(1);
+      
       order.setOrderBook(orderBook);
 
       Map<String, Object> orderBookResponse = orderBookService.matchOrder(order, orderBook);
@@ -48,6 +49,7 @@ public class OrderController {
 
       orderBook.setOrderList(updatedOrderBook.getOrderList());
 
+      System.out.println("\n order controller line 21: 33" + updatedOrderBook.getOrderList());
       orderBookRepoService.addItem(orderBook);
       return true;
   }
