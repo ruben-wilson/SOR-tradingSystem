@@ -22,7 +22,7 @@ function AskOrderTable ({ asks }) {
           <button type="button" className="btn btn-danger pl-4 my-2 mx-4" onClick={()=>{setForm(true);}}>
             Make a Sell 
           </button>
-          <h1>Asks</h1>
+          <h1 className="text-info">Asks</h1>
         </div>
 
         <table className="table table-danger">

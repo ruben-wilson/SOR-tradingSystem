@@ -1,11 +1,21 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import appCss from "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import "./App.css"
 import NavBar from "./components/NavBar";
 import OrderBook from "./components/OrderBook";
-import {FormContext} from "./contextProviders/FormContext";
+import Home from "./components/home/Home"
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home/>,
+  },
+  {
+    path: "/orderBook/:symbol",
+    element: <OrderBook />,
+  },
+]);
 
 
 
@@ -14,11 +24,8 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
-
-      
-        <OrderBook />
-
+      <NavBar/>
+      <RouterProvider router={router} />
     </div>
   );
 }

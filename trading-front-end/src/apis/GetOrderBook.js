@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const fetchOrderBook = (url) => {
+const fetchOrderBook = (url, symbol) => {
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ const fetchOrderBook = (url) => {
       axios
         .get(url, {
           params: {
-            id: 1,
+            symbol: symbol,
           },
         })
         .catch((error) => {
@@ -21,6 +21,7 @@ const fetchOrderBook = (url) => {
           setError(error);
         })
         .then((response) => {
+          console.log(response);
           response.data == "undefined"
             ? setReload(true)
             : setData(response.data);
@@ -29,7 +30,7 @@ const fetchOrderBook = (url) => {
         .finally(() => {
           setLoading(false);
         });
-    }, 500);
+    }, 1000);
 
     return () => {
       clearInterval(timer);

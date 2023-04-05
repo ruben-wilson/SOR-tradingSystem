@@ -1,23 +1,38 @@
-import React from "react";
-import "../styles/components/home.scss";
+import React, {useState} from "react";
+import "./home.css";
+
+
+import NavBar from "../NavBar";
+import SearchBar from "../SearchBar";
 
 export default function Home() {
+
+  const [inputValue, setInputValue] = useState("");
+
+  const items = [
+    "Apples",
+    "Bananas",
+    "Oranges",
+    "Pineapples",
+    "Mangoes",
+    "Grapes",
+  ];
+
+
   return (
-    <div
-      className="background"
-      style={{
-        backgroundImage: `url(${require("../styles/homewallpaper.jpg")})`,
-      }}
-    >
-      <div className="content">
-        <div className="text-container">
-          <h1>Trading App</h1>
-          <h2 className="home-text-sub">A place to track your trades</h2>
-          <Button className="home-button" href="/orders">
-            Check your Orders
-          </Button>
+    <>
+      <div className="mainContainer">
+        <div className="container-fluid" id="title">
+          <p className="text-info" id="titleText">
+            Crypto Exchange
+          </p>
         </div>
+
+        <div className="container-fluid p-0" id="searchBox">
+          <SearchBar />
+        </div>
+        {/* <div className="image"></div> */}
       </div>
-    </div>
+    </>
   );
 }
